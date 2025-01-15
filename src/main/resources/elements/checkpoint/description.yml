@@ -31,7 +31,7 @@ properties:
     - name: contextPath
       title: URI template
       type: string
-      default: '/chains/%%{chain-id-placeholder}/sessions/{checkpointSessionId}/checkpoint-elements/%%{created-element-id-placeholder}/retry'
+      default: "/chains/%%{chain-id-placeholder}/sessions/{checkpointSessionId}/checkpoint-elements/%%{created-element-id-placeholder}/retry"
       resetValueOnCopy: true
     - name: httpMethodRestrict
       type: string
@@ -46,4 +46,4 @@ properties:
       title: Element Id
       type: string
       resetValueOnCopy: true
-      default: '%%{created-element-id-placeholder}'
+      default: "%%{created-element-id-placeholder}"

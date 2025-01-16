@@ -20,9 +20,9 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.2
 designParameters:
-  externalParticipantId: '##{elementName}'
-  externalParticipantName: 'QIP chain: ##{chainName}'
-  requestLineTitle: 'QIP chain call'
+  externalParticipantId: "##{elementName}"
+  externalParticipantName: "QIP chain: ##{chainName}"
+  requestLineTitle: "QIP chain call"
   directionToChain: false
   hasResponse: true
 properties:
@@ -33,7 +33,7 @@ properties:
       mandatory: false
       uiComponent: chain-call
       validation:
-        allOf: ['elementName']
+        allOf: ["elementName"]
   advanced:
     - name: timeout
       title: Timeout (ms)

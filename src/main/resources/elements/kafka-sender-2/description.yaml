@@ -21,9 +21,9 @@ colorType: sender
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'Kafka ##{brokers}'
-  externalParticipantName: 'Kafka ##{brokers}'
-  requestLineTitle: 'Put message to topic(s): ##{topics}'
+  externalParticipantId: "Kafka ##{brokers}"
+  externalParticipantName: "Kafka ##{brokers}"
+  requestLineTitle: "Put message to topic(s): ##{topics}"
   directionToChain: false
   hasResponse: false
 properties:
@@ -35,16 +35,12 @@ properties:
       validation:
         conditions:
           - property: connectionSourceType
-            equalTo: 'maas'
-            mandatoryProperties: ['topicsClassifierName']
+            equalTo: "maas"
+            mandatoryProperties: ["topicsClassifierName"]
           - property: connectionSourceType
-            equalTo: 'manual'
-            mandatoryProperties: [
-              'brokers',
-              'securityProtocol',
-              'saslMechanism',
-              'topics'
-            ]
+            equalTo: "manual"
+            mandatoryProperties:
+              ["brokers", "securityProtocol", "saslMechanism", "topics"]
     - name: key
       title: Key
       description: Record key

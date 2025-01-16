@@ -22,9 +22,9 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.3
 designParameters:
-  externalParticipantId: 'Kafka ##{brokers}'
-  externalParticipantName: 'Kafka ##{brokers}'
-  requestLineTitle: 'Put message to topic(s): ##{topics}'
+  externalParticipantId: "Kafka ##{brokers}"
+  externalParticipantName: "Kafka ##{brokers}"
+  requestLineTitle: "Put message to topic(s): ##{topics}"
   directionToChain: false
   hasResponse: false
 properties:

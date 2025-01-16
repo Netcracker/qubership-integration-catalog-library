@@ -25,7 +25,7 @@ customTabs:
   - name: Operation
     uiComponent: system
     validation:
-      anyOf: ['integrationGqlQuery', 'integrationOperationId']
+      anyOf: ["integrationGqlQuery", "integrationOperationId"]
   - name: Prepare Request
     uiComponent: system-request
   - name: Authorization

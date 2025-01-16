@@ -23,9 +23,9 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.3
 designParameters:
-  externalParticipantId: 'Kafka ##{brokers}'
-  externalParticipantName: 'Kafka ##{brokers}'
-  requestLineTitle: 'Pull message from topic(s): ##{topics}'
+  externalParticipantId: "Kafka ##{brokers}"
+  externalParticipantName: "Kafka ##{brokers}"
+  requestLineTitle: "Pull message from topic(s): ##{topics}"
   directionToChain: true
   hasResponse: false
 properties:

@@ -22,9 +22,9 @@ colorType: trigger
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'RabbitMQ ##{addresses}'
-  externalParticipantName: 'RabbitMQ ##{addresses}'
-  requestLineTitle: 'Pull message from exchange: ##{exchange}, queues: ##{queues}'
+  externalParticipantId: "RabbitMQ ##{addresses}"
+  externalParticipantName: "RabbitMQ ##{addresses}"
+  requestLineTitle: "Pull message from exchange: ##{exchange}, queues: ##{queues}"
   directionToChain: true
   hasResponse: false
 properties:
@@ -36,16 +36,16 @@ properties:
       validation:
         conditions:
           - property: connectionSourceType
-            equalTo: 'maas'
-            mandatoryProperties: ['vhostClassifierName']
+            equalTo: "maas"
+            mandatoryProperties: ["vhostClassifierName"]
           - property: connectionSourceType
-            equalTo: 'manual'
-            mandatoryProperties: ['addresses']
+            equalTo: "manual"
+            mandatoryProperties: ["addresses"]
     - name: exchange
       title: Exchange Name
       type: string
       mandatory: true
-      default: 'default' # instead of empty string
+      default: "default" # instead of empty string
     - name: queues
       title: Queue(s) Name
       description: The queue(s) to use for consuming messages (separated by comma)
@@ -60,15 +60,15 @@ properties:
     - name: acknowledgeMode
       title: Acknowledge Mode
       description: >
-         <p>
-            <b>NONE</b> - no acknowledgment will be sent.
-         </p>
-         <p>
-            <b>MANUAL</b> - immediately send an acknowledgment (normal or negative) when message is taken.
-         </p>
-         <p>
-            <b>AUTO</b> - send an acknowledgment (normal or negative) after the end of the chain.
-         </p>
+        <p>
+           <b>NONE</b> - no acknowledgment will be sent.
+        </p>
+        <p>
+           <b>MANUAL</b> - immediately send an acknowledgment (normal or negative) when message is taken.
+        </p>
+        <p>
+           <b>AUTO</b> - send an acknowledgment (normal or negative) after the end of the chain.
+        </p>
       allowCustomValue: false
       type: string
       allowedValues:
@@ -114,13 +114,13 @@ properties:
       type: string
       query: true
   hidden:
-  # Parameters below managed by custom UI tab component
+    # Parameters below managed by custom UI tab component
     - name: connectionSourceType
       title: Connection source type
       type: string
       allowedValues:
-      - maas
-      - manual
+        - maas
+        - manual
       mandatory: true
       default: manual
     - name: vhost

@@ -20,8 +20,8 @@ inputEnabled: true
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: '##{ELEMENT_CHAIN_SELF_REF}'
-  requestLineTitle: 'Read local file: ##{antInclude}'
+  externalParticipantId: "##{ELEMENT_CHAIN_SELF_REF}"
+  requestLineTitle: "Read local file: ##{antInclude}"
   directionToChain: true
   hasResponse: false
 properties:

@@ -21,8 +21,8 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.4
 designParameters:
-  externalParticipantId: '##{ELEMENT_CHAIN_SELF_REF}'
-  requestLineTitle: '##{ELEMENT_NAME_REF}'
+  externalParticipantId: "##{ELEMENT_CHAIN_SELF_REF}"
+  requestLineTitle: "##{ELEMENT_NAME_REF}"
   directionToChain: true
   hasResponse: false
 customTabs:

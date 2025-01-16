@@ -22,9 +22,9 @@ colorType: trigger
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'SFTP server: ##{connectUrl}'
-  externalParticipantName: 'SFTP server: ##{connectUrl}'
-  requestLineTitle: 'Download created/updated file: ##{antInclude}'
+  externalParticipantId: "SFTP server: ##{connectUrl}"
+  externalParticipantName: "SFTP server: ##{connectUrl}"
+  requestLineTitle: "Download created/updated file: ##{antInclude}"
   directionToChain: false
   hasResponse: false
 properties:
@@ -37,7 +37,7 @@ properties:
       autofocus: true
     - name: scheduler.cron
       title: Polling schedule (cron expression)
-      description: 'Quartz cron expression. Example (every 5 minutes): 0 */5 * ? * *'
+      description: "Quartz cron expression. Example (every 5 minutes): 0 */5 * ? * *"
       type: string
       query: true
       mandatory: true
@@ -81,7 +81,7 @@ properties:
     - name: scheduler.triggerGroup
       title: Scheduler triggerGroup
       type: string
-      default: '%%{domain-placeholder}-group'
+      default: "%%{domain-placeholder}-group"
       mandatory: true
       query: true
     - name: streamDownload

@@ -23,10 +23,10 @@ customTabs:
   - name: Logging
     uiComponent: log-record
 designParameters:
-    externalParticipantId: '##{ELEMENT_CHAIN_SELF_REF}'
-    requestLineTitle: '##{ELEMENT_NAME_REF}'
-    directionToChain: true
-    hasResponse: false
+  externalParticipantId: "##{ELEMENT_CHAIN_SELF_REF}"
+  requestLineTitle: "##{ELEMENT_NAME_REF}"
+  directionToChain: true
+  hasResponse: false
 properties:
   hidden:
     - name: logLevel

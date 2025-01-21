@@ -21,15 +21,15 @@ inputEnabled: false
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: '##{ELEMENT_CHAIN_SELF_REF}'
-  requestLineTitle: 'Invoke by cron expression: ##{cron}'
+  externalParticipantId: "##{ELEMENT_CHAIN_SELF_REF}"
+  requestLineTitle: "Invoke by cron expression: ##{cron}"
   directionToChain: true
   hasResponse: false
 properties:
   common:
     - name: cron
       title: Cron expression
-      description: 'Quartz cron expression. Example (every 5 minutes): 0 */5 * ? * *'
+      description: "Quartz cron expression. Example (every 5 minutes): 0 */5 * ? * *"
       type: string
       query: true
       mandatory: true

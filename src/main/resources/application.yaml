@@ -21,7 +21,7 @@ consul:
 camel:
   constants:
     request-filter-header:
-      name: 'requestFilterHeaderAllowlist'
+      name: "requestFilterHeaderAllowlist"
 
 qip:
   element-descriptors:

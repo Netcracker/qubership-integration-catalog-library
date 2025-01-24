@@ -21,9 +21,9 @@ inputEnabled: true
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'RabbitMQ ##{addresses}'
-  externalParticipantName: 'RabbitMQ ##{addresses}'
-  requestLineTitle: 'Put message to exchange: ##{exchange}, queues: ##{queues}'
+  externalParticipantId: "RabbitMQ ##{addresses}"
+  externalParticipantName: "RabbitMQ ##{addresses}"
+  requestLineTitle: "Put message to exchange: ##{exchange}, queues: ##{queues}"
   directionToChain: false
   hasResponse: false
 properties:
@@ -35,11 +35,11 @@ properties:
       validation:
         conditions:
           - property: connectionSourceType
-            equalTo: 'maas'
-            mandatoryProperties: ['vhostClassifierName']
+            equalTo: "maas"
+            mandatoryProperties: ["vhostClassifierName"]
           - property: connectionSourceType
-            equalTo: 'manual'
-            mandatoryProperties: ['addresses']
+            equalTo: "manual"
+            mandatoryProperties: ["addresses"]
     - name: exchange
       title: Exchange Name
       type: string
@@ -75,8 +75,8 @@ properties:
       title: Connection source type
       type: string
       allowedValues:
-      - maas
-      - manual
+        - maas
+        - manual
       mandatory: true
       default: manual
     - name: vhost

@@ -22,8 +22,8 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.1
 designParameters:
-  externalParticipantId: '##{ELEMENT_CHAIN_SELF_REF}'
-  requestLineTitle: 'Invoke by cron expression: ##{scheduler.cron}'
+  externalParticipantId: "##{ELEMENT_CHAIN_SELF_REF}"
+  requestLineTitle: "Invoke by cron expression: ##{scheduler.cron}"
   directionToChain: true
   hasResponse: false
 properties:

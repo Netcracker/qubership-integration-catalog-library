@@ -20,9 +20,9 @@ inputEnabled: true
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'SFTP server: ##{connectUrl}'
-  externalParticipantName: 'SFTP server: ##{connectUrl}'
-  requestLineTitle: 'Download file: ##{antInclude}'
+  externalParticipantId: "SFTP server: ##{connectUrl}"
+  externalParticipantName: "SFTP server: ##{connectUrl}"
+  requestLineTitle: "Download file: ##{antInclude}"
   directionToChain: false
   hasResponse: false
 properties:

@@ -55,7 +55,7 @@ public class MaskedField extends AbstractEntity {
     }
 
     public void merge(MaskedField other) {
-        name = other.name;
+        this.setName(other.name);
     }
 
     public MaskedField copy() {

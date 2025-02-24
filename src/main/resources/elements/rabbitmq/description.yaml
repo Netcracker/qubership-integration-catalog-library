@@ -23,9 +23,9 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.3
 designParameters:
-  externalParticipantId: 'RabbitMQ ##{addresses}'
-  externalParticipantName: 'RabbitMQ ##{addresses}'
-  requestLineTitle: 'Pull message from exchange: ##{exchange}, queues: ##{queues}'
+  externalParticipantId: "RabbitMQ ##{addresses}"
+  externalParticipantName: "RabbitMQ ##{addresses}"
+  requestLineTitle: "Pull message from exchange: ##{exchange}, queues: ##{queues}"
   directionToChain: true
   hasResponse: false
 properties:
@@ -106,4 +106,3 @@ properties:
       title: Password
       type: string
       query: true
-

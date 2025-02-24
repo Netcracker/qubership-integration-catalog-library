@@ -22,9 +22,9 @@ colorType: trigger
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'Google Cloud PubSub Project Id ##{projectId}'
-  externalParticipantName: 'Google Cloud PubSub Project Id ##{projectId}'
-  requestLineTitle: 'Read message from ##{destinationName}: ##{destinationName}'
+  externalParticipantId: "Google Cloud PubSub Project Id ##{projectId}"
+  externalParticipantName: "Google Cloud PubSub Project Id ##{projectId}"
+  requestLineTitle: "Read message from ##{destinationName}: ##{destinationName}"
   directionToChain: true
   hasResponse: false
 properties:

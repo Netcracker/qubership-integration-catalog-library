@@ -23,9 +23,9 @@ outputEnabled: true
 container: false
 deprecated: true # TODO deprecated since 22.1
 designParameters:
-  externalParticipantId: 'SFTP server: ##{connectUrl}'
-  externalParticipantName: 'SFTP server: ##{connectUrl}'
-  requestLineTitle: 'Download created/updated file: ##{antInclude}'
+  externalParticipantId: "SFTP server: ##{connectUrl}"
+  externalParticipantName: "SFTP server: ##{connectUrl}"
+  requestLineTitle: "Download created/updated file: ##{antInclude}"
   directionToChain: false
   hasResponse: false
 properties:

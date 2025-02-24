@@ -21,9 +21,9 @@ colorType: sender
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'GraphQL server: ##{uri}'
-  externalParticipantName: 'GraphQL server: ##{uri}'
-  requestLineTitle: 'GraphQL request (query/mutation), operation: ##{operationName}'
+  externalParticipantId: "GraphQL server: ##{uri}"
+  externalParticipantName: "GraphQL server: ##{uri}"
+  requestLineTitle: "GraphQL request (query/mutation), operation: ##{operationName}"
   directionToChain: false
   hasResponse: true
 properties:

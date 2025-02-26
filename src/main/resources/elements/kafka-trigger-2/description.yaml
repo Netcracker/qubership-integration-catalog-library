@@ -22,9 +22,9 @@ colorType: trigger
 outputEnabled: true
 container: false
 designParameters:
-  externalParticipantId: 'Kafka ##{brokers}'
-  externalParticipantName: 'Kafka ##{brokers}'
-  requestLineTitle: 'Pull message from topic(s): ##{topics}'
+  externalParticipantId: "Kafka ##{brokers}"
+  externalParticipantName: "Kafka ##{brokers}"
+  requestLineTitle: "Pull message from topic(s): ##{topics}"
   directionToChain: true
   hasResponse: false
 properties:
@@ -36,16 +36,12 @@ properties:
       validation:
         conditions:
           - property: connectionSourceType
-            equalTo: 'maas'
-            mandatoryProperties: [ 'topicsClassifierName' ]
+            equalTo: "maas"
+            mandatoryProperties: ["topicsClassifierName"]
           - property: connectionSourceType
-            equalTo: 'manual'
-            mandatoryProperties: [
-              'brokers',
-              'securityProtocol',
-              'saslMechanism',
-              'topics'
-            ]
+            equalTo: "manual"
+            mandatoryProperties:
+              ["brokers", "securityProtocol", "saslMechanism", "topics"]
     - name: groupId
       title: Group ID
       description: The ID of the group the Producer is assigned to

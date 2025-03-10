@@ -282,6 +282,15 @@ public class ExportImportUtils {
         }
     }
 
+    public static void writeZip(ZipOutputStream zipOut, String filepath, String contentString) throws IOException {
+        zipOut.putNextEntry(new ZipEntry(filepath));
+        if (!StringUtils.isBlank(contentString)) {
+            byte[] content = contentString.getBytes();
+            zipOut.write(content, 0, content.length);
+        }
+        zipOut.closeEntry();
+    }
+
     public static String getSpecificationFileName(JsonNode specificationSourceNode, OperationProtocol protocol) {
         String filename = getNodeAsText(specificationSourceNode.get(AbstractSystemEntity.Fields.name));
         if (!StringUtils.isBlank(filename)) {
@@ -335,6 +344,10 @@ public class ExportImportUtils {
         return SPECIFICATION_GROUP_FILE_PREFIX + id + "." + YAML_EXTENSION;
     }
 
+    public static String generateTemplateFileExportName(String id) {
+        return TEMPLATE_YAML_NAME_PREFIX + id + "." + YAML_EXTENSION;
+    }
+
     public static ResponseEntity<Object> convertFileToResponse(byte[] payload, String fileName) {
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
@@ -347,12 +360,7 @@ public class ExportImportUtils {
     }
 
     public static void writeSystemObject(ZipOutputStream zipOut, String filepath, String contentString) throws IOException {
-        zipOut.putNextEntry(new ZipEntry(filepath));
-        if (!StringUtils.isBlank(contentString)) {
-            byte[] content = contentString.getBytes();
-            zipOut.write(content, 0, content.length);
-        }
-        zipOut.closeEntry();
+        writeZip(zipOut, filepath, contentString);
     }
 
     public static String getFullSpecificationFileName(SpecificationSource source) {
@@ -367,10 +375,12 @@ public class ExportImportUtils {
         return null;
     }
 
+    @Deprecated
     public static List<File> extractSystemsFromZip(File inputArchFile, String importFolderName) throws IOException {
         return extractSystemsFromZip(FileUtils.openInputStream(inputArchFile), importFolderName);
     }
 
+    @Deprecated
     public static List<File> extractSystemsFromZip(InputStream is, String importFolderName) throws IOException {
         try (ZipInputStream inputStream = new ZipInputStream(is)) {
             extractZip(importFolderName, inputStream, ARCH_PARENT_DIR);
@@ -379,6 +389,7 @@ public class ExportImportUtils {
         }
     }
 
+    @Deprecated
     public static List<File> extractSystemsFromImportDirectory(String importFolderName) throws IOException {
         Path start = Paths.get(importFolderName + File.separator + ARCH_PARENT_DIR);
         if (Files.exists(start)) {
@@ -393,10 +404,12 @@ public class ExportImportUtils {
         return Collections.emptyList();
     }
 
+    @Deprecated
     public static String extractSystemIdFromFileName(File systemFile) {
         return systemFile.getName().substring(SERVICE_YAML_NAME_PREFIX.length(), systemFile.getName().lastIndexOf("."));
     }
 
+    @Deprecated
     private static void extractZip(String importFolderName, ZipInputStream inputStream, String archParentDir) throws IOException {
         Path path = Paths.get(importFolderName);
 

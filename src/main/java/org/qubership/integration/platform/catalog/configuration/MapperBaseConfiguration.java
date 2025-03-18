@@ -17,10 +17,7 @@
 package org.qubership.integration.platform.catalog.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -83,6 +80,12 @@ public class MapperBaseConfiguration {
         yamlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         return yamlMapper;
+    }
+
+    //TODO Fix field order
+    @Bean("kameletYamlMapper")
+    public YAMLMapper kameletYamlMapper() {
+        return new YAMLMapper(createCustomYamlFactory());
     }
 
     private YAMLFactory createCustomYamlFactory() {

@@ -18,7 +18,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
 
-        <revision>0.1.2</revision>
+        <revision>0.1.3</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
@@ -50,6 +50,7 @@
         <woden-core.version>1.0M10</woden-core.version>
         <soa-model-core.version>1.6.4</soa-model-core.version>
         <commons-validator.version>1.7</commons-validator.version>
+        <camel-k.version>2.5.0</camel-k.version>
 
         <jakarta.validation-api.version>3.1.0-M1</jakarta.validation-api.version>
         <jakarta.annotation-api.version>3.0.0-M1</jakarta.annotation-api.version>
@@ -254,6 +255,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel.k</groupId>
+            <artifactId>camel-k-crds</artifactId>
+            <version>${camel-k.version}</version>
         </dependency>
     </dependencies>
 

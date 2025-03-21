@@ -1,0 +1,26 @@
+apiVersion: camel.apache.org/v1
+kind: Kamelet
+metadata:
+  name: groovy-script
+spec:
+  definition:
+    title: "Groovy Script Executor"
+    description: "Executes a Groovy script and passes the result to the next step."
+    required:
+      - script
+    properties:
+      script:
+        title: "Groovy Script"
+        description: "The Groovy script to execute."
+        type: string
+  dependencies:
+    - "camel:groovy"
+    - "camel:kamelet"
+  template:
+    from:
+      uri: "kamelet:source"
+      steps:
+        - setBody:
+            simple: "{{script}}"
+        - to: "language:groovy"
+        - to: "kamelet:sink"

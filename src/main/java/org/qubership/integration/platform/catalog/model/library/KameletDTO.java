@@ -17,6 +17,9 @@ public class KameletDTO {
     @Schema(description = "Metadata containing the name and labels of the Kamelet")
     private JsonNode metadata;
 
+    @Schema(description = "Labels of the Kamelet")
+    private JsonNode labels;
+
     @Schema(description = "Specification of the Kamelet")
     private JsonNode spec;
 }

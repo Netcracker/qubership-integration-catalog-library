@@ -55,9 +55,9 @@ public class KameletStorageService {
     public String getKameletSpec(String name) {
         KameletDTO kamelet = kamelets.get(name);
         try {
-            return (kamelet != null) ? jsonMapper.writeValueAsString(kamelet.getSpec()) : null;
+            return (kamelet != null) ? jsonMapper.writeValueAsString(kamelet.getSpec().get("definition")) : null;
         } catch (IOException e) {
-            throw new RuntimeException("Error serializing Kamelet Spec to JSON", e);
+            throw new RuntimeException("Error serializing Kamelet Definition to JSON", e);
         }
     }
 

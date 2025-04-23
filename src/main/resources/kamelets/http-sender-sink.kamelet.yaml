@@ -1,0 +1,157 @@
+apiVersion: camel.apache.org/v1
+kind: Kamelet
+metadata:
+  name: http-sender-sink
+  labels:
+    camel.apache.org/kamelet.type: "sink"
+spec:
+  definition:
+    title: "Http Sender"
+    description: |
+      Http Sender
+      Make a call to a specified URI on external system
+    required:
+      - sessionStepId
+      - methodComponent
+      - uri
+    properties:
+      methodComponent:
+        title: HTTP Method
+        description: HTTP method
+        type: string
+        default: GET
+        enum: [ "GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "TRACE", "PATCH" ]
+      uri:
+        title: URI
+        description: "URI format: https://example.com:443/test. Port is optional parameter (default ports - HTTP: 80, HTTPS: 443)"
+        type: string
+        pattern: "^https?:\\/\\/[a-zA-Z0-9.-]+(:\\d+)?(\\/([a-zA-Z0-9._~\\-\\/]*))?\\/?$"
+      connectTimeout:
+        title: Connection timeout (ms)
+        description: Specifies connection timeout in millis (default value will be used if nothing is given)
+        type: number
+        default: 120000
+      isExternalCall:
+        title: External call
+        description: |
+          If checked, then communication is done via Egress gateway. Both HTTP and HTTPS are allowed.
+          When default registration of routes is disabled via global environment settings, it is required
+          to manually configure these routes to properly invoke specified endpoint.
+        type: boolean
+        default: true
+      m2m:
+        title: Enable M2M Security
+        description: Specifies whether M2M token should be used to make a call
+        type: boolean
+        default: false
+      reuseEstablishedConnection:
+        title: Reuse established connection
+        description: If checked - HTTP client will use the connection for multiple requests
+        type: boolean
+        default: true
+      propagateContext:
+        title: Propagate context
+        description: Propagate context to headers before sending message
+        type: boolean
+        default: true
+      overrideContextParams:
+        title: Override context parameters
+        description: Propagate props to headers before sending message
+        type: string # map<string, string>
+      correlationIdName:
+        title: Correlation id name
+        type: string
+      correlationIdPosition:
+        title: Correlation id position
+        type: string
+        enum: [ "Header", "Body" ]
+      sessionStepId:
+        title: Session Step Id
+        description: Inner tech property for session logging purposes
+        type: string
+  template:
+    from:
+      uri: kamelet:source
+      steps:
+        - choice:
+            when:
+              - expression:
+                  constant:
+                    expression: "{{isExternalCall}}"
+                steps:
+                  - process:
+                      ref: externalURLConstructorProcessor
+                  - setHeader:
+                      name: CamelHttpUri
+                      simple: ${exchangeProperty[internalKameletProperty_externalUrl]}
+            otherwise:
+              steps:
+                - setHeader:
+                    name: CamelHttpUri
+                    constant: "{{uri}}"
+        - choice:
+            when:
+              - expression:
+                  constant:
+                    expression: "{{?correlationIdPosition}}"
+                steps:
+                  - setProperty:
+                      name: correlationIdName
+                      constant: "{{?correlationIdPosition}}"
+        - choice:
+            when:
+              - expression:
+                  constant:
+                    expression: "{{?correlationIdName}}"
+                steps:
+                  - setProperty:
+                      name: correlationIdName
+                      constant: "{{?correlationIdName}}"
+                  - process:
+                      ref: correlationIdPropagationProcessor
+        - choice:
+            when:
+              - expression:
+                  constant:
+                    expression: "{{?m2m}}"
+                steps:
+                  - process:
+                      ref: securityProcessor
+        - step:
+            steps:
+              - setHeader:
+                  name: CamelHttpMethod
+                  constant: "{{methodComponent}}"
+              - doTry:
+                  steps:
+                    - process:
+                        ref: httpSenderProcessor
+                    - process:
+                        ref: contextPropagationProcessor
+                    - process:
+                        ref: httpProducerCharsetProcessor
+                    - toD:
+                        uri: http:stub?connectTimeout={{connectTimeout}}&connectionRequestTimeout={{connectTimeout}}&soTimeout={{connectTimeout}}&;responseTimeout={{connectTimeout}};httpClientConfigurer=#861cfd55-9f75-4c62-afde-9c0ecee31a02&followRedirects=true
+                        allowOptimisedComponents: false
+                    - doCatch:
+                        exception:
+                          - java.lang.Exception
+                        steps:
+                          - choice:
+                              when:
+                                - simple: ${exception} is 'org.apache.camel.http.base.HttpOperationFailedException'
+                                  steps:
+                                    - setHeader:
+                                        name: CamelHttpResponseCode
+                                        simple: ${exchangeProperty.CamelExceptionCaught.statusCode}
+                                    - process:
+                                        ref: setCaughtHttpExceptionContextProcessor
+                          - process:
+                              ref: throwCaughtExceptionProcessor
+                    - doFinally:
+                        steps:
+                          - removeProperty: internalProperty_overrideContextParams
+                          - process:
+                              ref: contextRestoreProcessor
+        - removeHeader: CamelHttpUri
+        - to: "kamelet:sink"

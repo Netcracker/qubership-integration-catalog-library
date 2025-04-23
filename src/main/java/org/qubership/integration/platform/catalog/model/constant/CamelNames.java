@@ -102,6 +102,7 @@ public final class CamelNames {
     public static final String OPERATION_PATH_EXCHANGE = "integrationOperationPath";
     public static final String OPERATION_ASYNC_PROPERTIES = "integrationOperationAsyncProperties";
     public static final String SERVICE_CALL_ADDITIONAL_PARAMETERS = "integrationAdditionalParameters";
+    public static final String KAMELET_PROPERTIES = "kameletProperties";
 
     public static final String GRPC_PROPERTIES = "grpcProperties";
     public static final Set<String> GRPC_PROPERTY_NAMES = Set.of(

@@ -33,5 +33,6 @@ public enum ElementType {
     @JsonProperty("container") CONTAINER,
     @JsonProperty("swimlane") SWIMLANE,
     @JsonProperty("reuse") REUSE,
-    @JsonProperty("reuse-reference") REUSE_REFERENCE
+    @JsonProperty("reuse-reference") REUSE_REFERENCE,
+    @JsonProperty("kamelet") KAMELET
 }

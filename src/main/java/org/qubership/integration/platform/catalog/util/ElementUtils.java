@@ -63,6 +63,10 @@ public class ElementUtils {
         return (Map<String, Object>) properties.getOrDefault(CamelNames.SERVICE_CALL_ADDITIONAL_PARAMETERS, Collections.emptyMap());
     }
 
+    public static Map<String, Object> extractKameletProperties(Map<String, Object> properties) {
+        return (Map<String, Object>) properties.getOrDefault(CamelNames.KAMELET_PROPERTIES, Collections.emptyMap());
+    }
+
 
     /**
      * @param primary - overrides secondary parameters in case of conflict and if value non-empty

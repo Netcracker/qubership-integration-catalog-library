@@ -28,7 +28,7 @@ import java.util.function.BiFunction;
 
 @Component
 public class FilterConditionPredicateBuilderFactory {
-    private final char escapeChar = '\\';
+    private static final char ESCAPE_CHAR = '\\';
 
     public <T> BiFunction<Expression<T>, T, Predicate> getPredicateBuilder(
             CriteriaBuilder criteriaBuilder,
@@ -40,18 +40,18 @@ public class FilterConditionPredicateBuilderFactory {
                     criteriaBuilder::notEqual;
             case CONTAINS -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), escapeChar
+                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), ESCAPE_CHAR
             );
             case DOES_NOT_CONTAIN -> (expression, value) -> criteriaBuilder.notLike(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), escapeChar
+                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), ESCAPE_CHAR
             );
             case START_WITH -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    String.valueOf(escapeLikeValue((String) value)).toLowerCase() + "%", escapeChar);
+                    String.valueOf(escapeLikeValue((String) value)).toLowerCase() + "%", ESCAPE_CHAR);
             case ENDS_WITH -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    "%" + String.valueOf(escapeLikeValue((String) value)).toLowerCase(), escapeChar);
+                    "%" + String.valueOf(escapeLikeValue((String) value)).toLowerCase(), ESCAPE_CHAR);
             case IN -> (expression, value) -> expression.as(String.class).in(Arrays.asList(String.valueOf(value).split(",")));
             case NOT_IN -> (expression, value) -> criteriaBuilder.not(expression.as(String.class).in(Arrays.asList(String.valueOf(value).split(","))));
             case EMPTY -> (expression, value) -> criteriaBuilder.or(expression.isNull(), criteriaBuilder.equal(expression.as(String.class), ""));
@@ -67,8 +67,8 @@ public class FilterConditionPredicateBuilderFactory {
 
     public String escapeLikeValue(String value) {
         return value
-                .replace("\\", escapeChar + "\\")
-                .replace("_", escapeChar + "_")
-                .replace("%", escapeChar + "%");
+                .replace("\\", ESCAPE_CHAR + "\\")
+                .replace("_", ESCAPE_CHAR + "_")
+                .replace("%", ESCAPE_CHAR + "%");
     }
 }

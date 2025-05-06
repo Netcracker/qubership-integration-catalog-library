@@ -52,4 +52,7 @@ public interface TemplateRepository extends CommonRepository<Template>, JpaRepos
                 on el.id = usages.el_id
                 order by usages.templateId, ch.name, el.name""")
     List<TemplateUsage> getMappingTemplateUsages(Collection<String> mappingTemplateIds);
+
+    @Query("select t from templates t where t.id in :ids")
+    List<Template> findByIds(Collection<String> ids);
 }

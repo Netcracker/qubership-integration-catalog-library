@@ -20,6 +20,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
 import org.qubership.integration.platform.catalog.model.filter.FilterCondition;
+import org.springframework.data.jpa.repository.query.EscapeCharacter;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -28,8 +29,6 @@ import java.util.function.BiFunction;
 
 @Component
 public class FilterConditionPredicateBuilderFactory {
-    private static final char ESCAPE_CHAR = '\\';
-
     public <T> BiFunction<Expression<T>, T, Predicate> getPredicateBuilder(
             CriteriaBuilder criteriaBuilder,
             FilterCondition condition
@@ -40,18 +39,18 @@ public class FilterConditionPredicateBuilderFactory {
                     criteriaBuilder::notEqual;
             case CONTAINS -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), ESCAPE_CHAR
+                    criteriaBuilder.lower(criteriaBuilder.literal("%" + EscapeCharacter.DEFAULT.escape((String) value) + '%')), EscapeCharacter.DEFAULT.getEscapeCharacter()
             );
             case DOES_NOT_CONTAIN -> (expression, value) -> criteriaBuilder.notLike(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    criteriaBuilder.lower(criteriaBuilder.literal("%" + escapeLikeValue((String) value) + '%')), ESCAPE_CHAR
+                    criteriaBuilder.lower(criteriaBuilder.literal("%" + EscapeCharacter.DEFAULT.escape((String) value) + '%')), EscapeCharacter.DEFAULT.getEscapeCharacter()
             );
             case START_WITH -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    String.valueOf(escapeLikeValue((String) value)).toLowerCase() + "%", ESCAPE_CHAR);
+                    String.valueOf(EscapeCharacter.DEFAULT.escape((String) value)).toLowerCase() + "%", EscapeCharacter.DEFAULT.getEscapeCharacter());
             case ENDS_WITH -> (expression, value) -> criteriaBuilder.like(
                     criteriaBuilder.lower(expression.as(String.class)),
-                    "%" + String.valueOf(escapeLikeValue((String) value)).toLowerCase(), ESCAPE_CHAR);
+                    "%" + String.valueOf(EscapeCharacter.DEFAULT.escape((String) value)).toLowerCase(), EscapeCharacter.DEFAULT.getEscapeCharacter());
             case IN -> (expression, value) -> expression.as(String.class).in(Arrays.asList(String.valueOf(value).split(",")));
             case NOT_IN -> (expression, value) -> criteriaBuilder.not(expression.as(String.class).in(Arrays.asList(String.valueOf(value).split(","))));
             case EMPTY -> (expression, value) -> criteriaBuilder.or(expression.isNull(), criteriaBuilder.equal(expression.as(String.class), ""));
@@ -63,12 +62,5 @@ public class FilterConditionPredicateBuilderFactory {
                 return criteriaBuilder.between(expression.as(Timestamp.class), new Timestamp(Long.parseLong(String.valueOf(range[0]))), new Timestamp(Long.parseLong(String.valueOf(range[1]))));
             };
         };
-    }
-
-    public String escapeLikeValue(String value) {
-        return value
-                .replace("\\", ESCAPE_CHAR + "\\")
-                .replace("_", ESCAPE_CHAR + "_")
-                .replace("%", ESCAPE_CHAR + "%");
     }
 }

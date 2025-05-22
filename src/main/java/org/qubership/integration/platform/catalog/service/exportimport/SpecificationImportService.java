@@ -243,7 +243,7 @@ public class SpecificationImportService {
 
     /**
      * Checks whether the given WSDL content represents a main source by verifying the presence
-     * of both <binding> and <service> elements.
+     * of both {@literal <binding>} and {@literal <service>} elements.
      *
      * @param content the byte array of the WSDL file content
      * @return true if both binding and service tags are found; false otherwise

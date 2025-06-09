@@ -1,13 +1,23 @@
-# Catalog Library
+# Qubership Integration Catalog Library
 
-Catalog Library is a part of global integration solution, which is described here: [qubership-integration-platform](https://github.com/Netcracker/qubership-integration-platform).
+Contains model, configuration, and business logic classes that are shared between [runtime](https://github.com/Netcracker/qubership-integration-runtime-catalog) and [design-time](https://github.com/Netcracker/qubership-integration-designtime-catalog) catalog services of Qubership Integration Platform.
 
 ## Installation
 
-Installation is handled via docker-compose: [qubership-integration-platform](https://github.com/Netcracker/qubership-integration-platform).
+Catalog Library is an ordinary Maven jar package. It requires Maven and Java 21 for build. 
 
-## User Guide
+## Contribution
 
-This library builds a proper code transition between [Runtime Catalog](https://github.com/Netcracker/qubership-integration-runtime-catalog) and [Design Time Catalog](https://github.com/Netcracker/qubership-integration-designtime-catalog) microservices.
+For the details on contribution, see [Contribution Guide](CONTRIBUTING.md).
 
-## Test PR
+The library uses [Maven Checkstyle Plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/) to ensure code style consistency among Qubership Integration Platform's libraries and services. The rules are located in a separate [repository](https://github.com/Netcracker/qubership-integration-checkstyle). 
+
+Commits and pool requests should follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) strategy.
+
+## Licensing
+
+This software is licensed under Apache License Version 2.0. License text is located in [LICENSE](LICENSE) file.
+
+## Additional Resources
+
+- [Qubership Integration Platform](https://github.com/Netcracker/qubership-integration-platform) — сore deployment guide.

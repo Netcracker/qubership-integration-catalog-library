@@ -1,4 +1,4 @@
-# Qubership Integration Catalog Library
+# Qubership Integration Platform - Catalog Library
 
 Contains model, configuration, and business logic classes that are shared between [runtime](https://github.com/Netcracker/qubership-integration-runtime-catalog) and [design-time](https://github.com/Netcracker/qubership-integration-designtime-catalog) catalog services of Qubership Integration Platform.
 

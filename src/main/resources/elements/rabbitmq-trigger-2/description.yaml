@@ -22,8 +22,8 @@ colorType: trigger
 outputEnabled: true
 container: false
 customTabs:
-- name: Idempotency
-  uiComponent: idempotency-parameters
+  - name: Idempotency
+    uiComponent: idempotency-parameters
 designParameters:
   externalParticipantId: 'RabbitMQ ##{addresses}'
   externalParticipantName: 'RabbitMQ ##{addresses}'
@@ -117,13 +117,13 @@ properties:
       type: string
       query: true
   hidden:
-  # Parameters below managed by custom UI tab component
+    # The parameters below managed by custom UI tab component
     - name: connectionSourceType
       title: Connection source type
       type: string
       allowedValues:
-      - maas
-      - manual
+        - maas
+        - manual
       mandatory: true
       default: manual
     - name: vhost

@@ -39,6 +39,26 @@ public interface FolderRepository extends CommonRepository<Folder>, JpaRepositor
     @Query(
             nativeQuery = true,
             value = """
+                WITH RECURSIVE folder_hierarchy AS (
+                        SELECT
+                            f1.*
+                        FROM
+                            catalog.folders f1
+                        WHERE f1.id = :folderId
+                        UNION ALL
+                        SELECT
+                            f2.*
+                        FROM catalog.folders f2 INNER JOIN folder_hierarchy fh
+                            ON f2.id = fh.parent_folder_id
+                )
+                SELECT * FROM folder_hierarchy;
+            """
+    )
+    List<Folder> getPath(String folderId);
+
+    @Query(
+            nativeQuery = true,
+            value = """
                     WITH RECURSIVE folder_hierarchy AS (
                             SELECT
                                 f1.*
@@ -76,9 +96,9 @@ public interface FolderRepository extends CommonRepository<Folder>, JpaRepositor
                             SELECT f1.*
                             FROM catalog.folders f1
                             WHERE f1.id = :folderId OR f1.parent_folder_id = :folderId
-                    
+
                             UNION ALL
-                    
+
                             SELECT f2.*
                             FROM catalog.folders f2
                                      INNER JOIN parent_folders pf ON f2.id = pf.parent_folder_id
@@ -86,7 +106,7 @@ public interface FolderRepository extends CommonRepository<Folder>, JpaRepositor
                         SELECT DISTINCT *
                         FROM parent_folders
                     )
-                    
+
                     SELECT *
                     FROM catalog.folders result
                     WHERE result.id IN (
@@ -98,4 +118,23 @@ public interface FolderRepository extends CommonRepository<Folder>, JpaRepositor
                             WHERE parent_folder_id <> :folderId OR parent_folder_id IS NULL)"""
     )
     List<Folder> findAllFoldersToRootParentFolder(String folderId);
+
+    @Query(
+            nativeQuery = true,
+            value = """
+                with recursive nested_folders as (
+                    select f1.* from catalog.folders f1
+                           where f1.id in :folderIds
+                    union all
+                    select f2.* from catalog.folders f2
+                           inner join nested_folders nf
+                                   on f2.parent_folder_id = nf.id
+                )
+                delete
+                from catalog.folders f
+                where f.id in (select id from nested_folders)
+                returning f.id
+            """
+    )
+    List<String> deleteFolderTree(List<String> folderIds);
 }

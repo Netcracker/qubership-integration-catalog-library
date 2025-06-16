@@ -76,7 +76,9 @@ public class Chain extends FoldableEntity {
     private Set<MaskedField> maskedFields = new LinkedHashSet<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "chain",
+    @OneToMany(
+            mappedBy = "chain",
+            fetch = FetchType.LAZY,
             orphanRemoval = true,
             cascade = {PERSIST, REMOVE, MERGE}
     )

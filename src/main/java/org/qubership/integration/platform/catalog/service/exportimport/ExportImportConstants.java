@@ -30,6 +30,7 @@ public class ExportImportConstants {
     public static final String CHAIN_YAML_NAME_PREFIX = "chain-";
     public static final String SERVICE_YAML_NAME_PREFIX = "service-";
     public static final String SOURCE_YAML_NAME_PREFIX = "source-";
+    public static final String TEMPLATE_YAML_NAME_PREFIX = "template-";
     public static final String EXPORT_FILE_NAME_PREFIX = "export-";
     public static final String IMPORT_FILE_NAME_PREFIX = "import-";
     public static final String SPECIFICATION_GROUP_FILE_PREFIX = "specGroup-";

@@ -18,6 +18,7 @@ package org.qubership.integration.platform.catalog.persistence.configs.entity.ac
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.qubership.integration.platform.catalog.persistence.configs.entity.system.IntegrationSystem;
+import org.qubership.integration.platform.catalog.persistence.configs.entity.template.Template;
 
 @Schema(description = "Action log entity type")
 public enum EntityType {
@@ -48,7 +49,10 @@ public enum EntityType {
     DETAILED_DESIGN_TEMPLATE,
     IMPORT_INSTRUCTION,
     IMPORT_INSTRUCTIONS,
-    EXCHANGE;
+    EXCHANGE,
+    TEMPLATES,
+    MAPPING_TEMPLATE,
+    SCRIPT_TEMPLATE;
 
     public static EntityType getSystemType(IntegrationSystem system) {
         return switch (system.getIntegrationSystemType()) {
@@ -56,6 +60,14 @@ public enum EntityType {
             case EXTERNAL -> EXTERNAL_SERVICE;
             case IMPLEMENTED -> IMPLEMENTED_SERVICE;
             default -> EXTERNAL_SERVICE;
+        };
+    }
+
+    public static EntityType getTemplateType(Template template) {
+        return switch (template.getType()) {
+            case MAPPING -> MAPPING_TEMPLATE;
+            case SCRIPT -> SCRIPT_TEMPLATE;
+            default -> MAPPING_TEMPLATE;
         };
     }
 }

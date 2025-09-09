@@ -29,7 +29,7 @@ import java.util.List;
 
 public interface ChainRepository extends CommonRepository<Chain>, JpaRepository<Chain, String>, JpaSpecificationExecutor<Chain> {
     boolean existsByNameAndParentFolderId(String name, String parentFolderId);
-    
+
     @Modifying
     @Query("update chains chain set chain.modifiedWhen = :modifiedWhen where chain.id = :chainId")
     void updateModificationTimestamp(String chainId, Timestamp modifiedWhen);
@@ -52,9 +52,9 @@ public interface ChainRepository extends CommonRepository<Chain>, JpaRepository<
                         SELECT f1.*
                         FROM catalog.folders f1
                         WHERE f1.id = :folderId
-                
+
                         UNION ALL
-                
+
                         SELECT f2.*
                         FROM catalog.folders f2
                                  INNER JOIN parent_folders pf ON f2.id = pf.parent_folder_id
@@ -74,9 +74,9 @@ public interface ChainRepository extends CommonRepository<Chain>, JpaRepository<
                         SELECT f1.*
                         FROM catalog.folders f1
                         WHERE f1.id in :folderIds
-                
+
                         UNION ALL
-                
+
                         SELECT f2.*
                         FROM catalog.folders f2
                                  INNER JOIN parent_folders pf ON f2.parent_folder_id = pf.id

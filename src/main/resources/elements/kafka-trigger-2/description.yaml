@@ -22,8 +22,8 @@ colorType: trigger
 outputEnabled: true
 container: false
 customTabs:
-- name: Idempotency
-  uiComponent: idempotency-parameters
+  - name: Idempotency
+    uiComponent: idempotency-parameters
 designParameters:
   externalParticipantId: 'Kafka ##{brokers}'
   externalParticipantName: 'Kafka ##{brokers}'

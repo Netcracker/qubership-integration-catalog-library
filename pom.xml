@@ -6,6 +6,7 @@
     <artifactId>qip-catalog-library</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
+    <name>QIP Catalog Library</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -18,7 +19,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
 
-        <revision>0.1.3</revision>
+        <revision>0.2.0</revision>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
@@ -419,7 +420,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>

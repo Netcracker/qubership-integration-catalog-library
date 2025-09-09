@@ -86,7 +86,6 @@ properties:
       description: The serializer class for keys (defaults to the same as for messages if nothing is given)
       type: string
       allowedValues:
-        - ""
         - org.apache.kafka.common.serialization.ByteArraySerializer
         - org.apache.kafka.common.serialization.ByteBufferSerializer
         - org.apache.kafka.common.serialization.BytesSerializer
@@ -100,7 +99,7 @@ properties:
         - org.apache.kafka.common.serialization.VoidSerializer
       mandatory: false
       query: true
-      default: ""
+      default: org.apache.kafka.common.serialization.StringSerializer
     - name: propagateContext
       title: Propagate context
       description: Propagate context to headers before sending message
